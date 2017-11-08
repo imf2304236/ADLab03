@@ -92,7 +92,7 @@ public class Selection {
         show(a);
 
         sort(a);
-        if (!isSorted(a)) throw new Error();
+        // if (!isSorted(a)) throw new Error();
 
         System.out.print("Sorted array:   ");
         show(a);
