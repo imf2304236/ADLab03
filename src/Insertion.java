@@ -3,14 +3,17 @@
  * Created by IF on 03.11.17.
  */
 public class Insertion {
-    private static int exchCount = 0;
-    private static int compareCount = 0;
+    private static int exchCount;
+    private static int compareCount;
 
     /**
      * Sort method
      * @param a Array of Comparables
      */
     public static void sort(Comparable[] a) {
+        exchCount = 0;
+        compareCount = 0;
+
         int N = a.length;
         for (int i = 1; i < N; i++) {
             for (int j = i; j > 0 && less(a[j], a[j-1]); j--) {
@@ -67,6 +70,10 @@ public class Insertion {
         }
         System.out.println();
     }
+
+    public static int getCompareCount() { return compareCount; }
+
+    public static int getExchCount() { return exchCount; }
 
     /**
      * Main method to run tests

@@ -12,6 +12,8 @@ public class Merge {
      * @param a Array of Comparables
      */
     public static void sort(Comparable[] a) {
+        copyCount = 0;
+        compareCount = 0;
         temp = new Comparable[a.length];
         sort(a, 0, a.length - 1);
     }
@@ -104,6 +106,10 @@ public class Merge {
         }
         System.out.println();
     }
+
+    public static int getCompareCount() { return compareCount; }
+
+    public static int getCopyCount() { return copyCount; }
 
     /**
      * Main method to run tests
