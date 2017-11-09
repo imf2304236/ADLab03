@@ -8,27 +8,57 @@ import java.util.ArrayList;
  * Created by IF on 03.11.17.
  */
 public class Main {
-
-
     public static void main(String[] args) {
-        String[] a = new TextFileHandler("./resources/strings.txt").readfromFile();
+        int M = 5;
+        int K = 1024;
 
-        for (int k = 1; k <= 10; k++) {
-            int N = (int)Math.pow(2, k);
-            String[] temp1 = new String[N];
-            String[] temp2 = new String[N];
-            String[] temp3 = new String[N];
+        String[][] a = new String[M][K];
+        a[0] = TextFileHandler.readfromFile("./resources/strings1.txt");
+        a[1] = TextFileHandler.readfromFile("./resources/strings2.txt");
+        a[2] = TextFileHandler.readfromFile("./resources/strings3.txt");
+        a[3] = TextFileHandler.readfromFile("./resources/strings4.txt");
+        a[4] = TextFileHandler.readfromFile("./resources/strings5.txt");
 
-            for (int i = 0; i <= N-1; i++) {
-                temp1[i] = a[i];
-                temp2[i] = a[i];
-                temp3[i] = a[i];
+        // Average Case
+        System.out.printf("\nAVERAGE CASE\n");
+        System.out.format("\n%11s %14s %11s", "Array Size", "Compare Count", "Copy Count");
+
+        for (int row = 0; row < M; row++) {
+            for (int k = 1; k <= 10; k++) {
+                int N = (int) Math.pow(2, k);
+                String[][] temp = new String[M][N];
+
+                for (int i = 0; i < M; i++) {
+                    for (int j = 0; j <= N - 1; j++) {
+                        temp[i][j] = a[i][j];
+                    }
+                }
+
+                Merge.sort(temp[row]);
+                System.out.format("\n%11d %14d %11d", N, Merge.getCompareCount(), Merge.getCopyCount());
+
             }
+        }
 
-            System.out.printf("\nARRAY SIZE = %d", N);
-            Selection.main(temp1);
-            Insertion.main(temp2);
-            Merge.main(temp3);
+        // Best Case
+        System.out.printf("\nBEST CASE\n");
+        System.out.format("\n%11s %14s %11s", "Array Size", "Compare Count", "Copy Count");
+
+        for (int row = 0; row < M; row++) {
+            for (int k = 1; k <= 10; k++) {
+                int N = (int) Math.pow(2, k);
+                String[][] temp = new String[M][N];
+
+                for (int i = 0; i < M; i++) {
+                    for (int j = 0; j <= N - 1; j++) {
+                        temp[i][j] = a[i][j];
+                    }
+                }
+
+                Merge.sort(temp[row]);
+                Merge.sort(temp[row]);
+                System.out.format("\n%11d %14d %11d", N, Merge.getCompareCount(), Merge.getCopyCount());
+            }
         }
     }
 }
