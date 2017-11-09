@@ -1,28 +1,24 @@
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * ADLab03
  * Created by IF on 08.11.17.
  */
 public class TextFileHandler {
-    private static String FILE;
-
-    public TextFileHandler(String fileName) {
-        FILE = fileName;
-    }
-
-    public static String[] readfromFile() {
+    /**
+     * File reading method to read each line of a text file and store in an array
+     * @param sourceFile String of pathname of text file to read
+     * @return Array of strings of each line of the text file
+     */
+    public static String[] readfromFile(String sourceFile) {
         String[] a = new String[1024];
         BufferedReader reader = null;
 
         try {
-            Path stringsFile = Paths.get(FILE).toAbsolutePath();
-            reader = new BufferedReader(new FileReader(stringsFile.toString()));
+            Path filePath = Paths.get(sourceFile).toAbsolutePath();
+            reader = new BufferedReader(new FileReader(filePath.toString()));
             String line;
             line = reader.readLine();
             int i = 0;
@@ -32,8 +28,6 @@ public class TextFileHandler {
                 line = reader.readLine();
                 i++;
             }
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
         } catch (IOException e) {
             System.err.println(e);
         } finally {
@@ -47,4 +41,15 @@ public class TextFileHandler {
         }
         return a;
     }
+
+    /*
+    public static void writeToFile() {
+        try {
+            Path filePath = Paths.get(FILE).toAbsolutePath();
+            FileWriter writer = new FileWriter(filePath.toString());
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+    */
 }
